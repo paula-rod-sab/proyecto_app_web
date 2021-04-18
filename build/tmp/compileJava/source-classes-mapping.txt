@@ -1,0 +1,8 @@
+socialnetwork/model/Publication.java
+ socialnetwork.model.Publication
+socialnetwork/model/User.java
+ socialnetwork.model.User
+socialnetwork/SocialNetworkApplication.java
+ socialnetwork.SocialNetworkApplication
+socialnetwork/controllers/MainController.java
+ socialnetwork.controllers.MainController

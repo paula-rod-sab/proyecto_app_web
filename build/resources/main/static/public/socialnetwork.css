@@ -1,0 +1,20 @@
+body {
+    background-color: #baf1f1;
+}
+
+.publication .user {
+    font-weight: bold;
+}
+
+.publication .timestamp {
+    font-style: italic;
+}
+
+.publication {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.publication_text {
+    font-size: larger;
+}
