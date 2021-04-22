@@ -9,6 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @Configuration
 @EnableWebSecurity
@@ -23,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http
             .authorizeRequests()
-                .antMatchers("/login", "/public/**").permitAll()
+                .antMatchers("/login", "/public/**", "/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin().loginPage("/login").permitAll()
@@ -31,21 +35,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout().permitAll();
     }
 
+    @Qualifier("userDetailsServiceImpl")
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        /*
-         * Temporarily, define the credentials of a single user
-         * for the purpose of testing authentication.
-         * This code will be replaced in a later stage
-         * in order to aythenticate users from a database.
-         */
-        UserDetails user =
-             User.withDefaultPasswordEncoder()
-                .username("user@example.com")
-                .password("password")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

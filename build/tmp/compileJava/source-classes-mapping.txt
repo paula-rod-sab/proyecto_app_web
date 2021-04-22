@@ -1,10 +1,18 @@
 socialnetwork/model/Publication.java
  socialnetwork.model.Publication
-socialnetwork/controllers/MainController.java
- socialnetwork.controllers.MainController
+socialnetwork/services/UserService.java
+ socialnetwork.services.UserService
+socialnetwork/WebSecurityConfig.java
+ socialnetwork.WebSecurityConfig
 socialnetwork/SocialNetworkApplication.java
  socialnetwork.SocialNetworkApplication
 socialnetwork/model/User.java
  socialnetwork.model.User
-socialnetwork/WebSecurityConfig.java
- socialnetwork.WebSecurityConfig
+socialnetwork/controllers/MainController.java
+ socialnetwork.controllers.MainController
+socialnetwork/services/UserServiceImpl.java
+ socialnetwork.services.UserServiceImpl
+socialnetwork/services/UserDetailsServiceImpl.java
+ socialnetwork.services.UserDetailsServiceImpl
+socialnetwork/model/UserRepository.java
+ socialnetwork.model.UserRepository
