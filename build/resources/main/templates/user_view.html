@@ -6,24 +6,39 @@
         <link rel="stylesheet" href="public/socialnetwork.css">
     </head>
     <body>
-        <a href="http://localhost:8080/">Inicio</a></li>
-        <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
-        <div class="publications">
-            <div class="publication" th:each="publication : ${publications}">
-                <div class="publication_meta">
-                    <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
-                    <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
-                    <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
-                    <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="http://localhost:8080/">Inicio</a></li>
+                    <li>Explorar</li>
+                    <li>Notificaciones</li>
+                    <li>Mensajes</li>
+                    <li>Perfil</li>
+                    <li>Más opciones</li>
+                </ul>
+            </nav>
+        </header>
+        <article>
+            <section>
+                <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
+                <div class="publications">
+                    <div class="publication" th:each="publication : ${publications}">
+                        <div class="publication_meta">
+                            <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
+                            <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
+                            <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
+                            <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
+                        </div>
+                        <div class="publication_text" th:text="${publication.getText()}">
+                            El texto del mensaje
+                        </div>
+                        <div class="publication_interaction">
+                            <button class="like_buttom" type="button">Like</button>
+                            <textarea name="comment" form="usrform">Comment</textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="publication_text" th:text="${publication.getText()}">
-                    El texto del mensaje
-                </div>
-                <div class="publication_interaction">
-                    <button class="like_buttom" type="button">Like</button>
-                    <textarea name="comment" form="usrform">Comment</textarea>
-                </div>
-            </div>
-        </div>
+            </section>
+        </article>
     </body>
 </html>

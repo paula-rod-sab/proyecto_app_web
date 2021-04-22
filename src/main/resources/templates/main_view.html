@@ -6,33 +6,57 @@
         <link rel="stylesheet" href="public/socialnetwork.css">
     </head>
     <body>
-        <div th:text="${#authentication.principal.username}">
-            User name here
-        </div>
-        <h1>Bienvenid@, <span class="profile_user" th:text="${profileUser.getName()}">Profile user name</span></h1>
-        <h2>What's on your mind?</h2>
-        <textarea name="comment" form="usrform">Tell us about your day.</textarea>
-        <h2>Últimas publicaciones</h2>
-        <div class="publications">
-            <div class="publication" th:each="publication : ${publications}">
-                <div class="publication_meta">
-                    <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
-                    <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
-                    <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
-                    <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
+        <header>
+            <nav>
+                <ul>
+                    <li>Inicio</li>
+                    <li>Explorar</li>
+                    <li>Notificaciones</li>
+                    <li>Mensajes</li>
+                    <li>Perfil</li>
+                    <li>Más opciones</li>
+                    <li> 
+                        <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <article>
+            <section>
+                <div th:text="${#authentication.principal.username}">
+                    User name here
                 </div>
-                <div class="publication_text" th:text="${publication.getText()}">
-                    El texto del mensaje
+                <h1>Bienvenid@, <span class="profile_user" th:text="${profileUser.getName()}">Profile user name</span></h1>
+                <h2>What's on your mind?</h2>
+                <form>
+                    <input type="text" value="Tell us about your day">
+                </form>
+            </section>
+            <section>
+                <h2>Últimas publicaciones</h2>
+                <div class="publications">
+                    <div class="publication" th:each="publication : ${publications}">
+                        <div class="publication_meta">
+                            <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
+                            <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
+                            <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
+                            <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
+                        </div>
+                        <div class="publication_text" th:text="${publication.getText()}">
+                            El texto del mensaje
+                        </div>
+                        <form>
+                            <input type="button" value="like">
+                            <input type="text" value="comment">
+                            <input type="button" value="share">
+                        </form>
+                    </div>
                 </div>
-                <div class="publication_interaction">
-                    <button class="like_buttom" type="button">Like</button>
-                    <textarea name="comment" form="usrform">Comment</textarea>
-                </div>
-            </div>
-        </div>
-        <a href="http://localhost:8080/user">Bob`s Profile</a>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+                <a href="http://localhost:8080/user">Bob`s Profile</a>
+            </section>
+        </article>
+        
     </body>
 </html>
