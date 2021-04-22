@@ -6,7 +6,9 @@
         <link rel="stylesheet" href="public/socialnetwork.css">
     </head>
     <body>
-        
+        <div th:text="${#authentication.principal.username}">
+            User name here
+        </div>
         <h1>Bienvenid@, <span class="profile_user" th:text="${profileUser.getName()}">Profile user name</span></h1>
         <h2>What's on your mind?</h2>
         <textarea name="comment" form="usrform">Tell us about your day.</textarea>
@@ -28,6 +30,9 @@
                 </div>
             </div>
         </div>
-        <a href="http://localhost:8080/user">Bob`s Profile</a></li>
+        <a href="http://localhost:8080/user">Bob`s Profile</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     </body>
 </html>
