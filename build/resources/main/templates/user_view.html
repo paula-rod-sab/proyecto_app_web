@@ -2,25 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>User</title>
+        <title>witticism - User</title>
         <link rel="stylesheet" href="public/socialnetwork.css">
+        <link rel="icon" href="/public/logo/logolila.ico">
     </head>
     <body>
         <header>
             <nav>
                 <ul>
+                    <li><img src="/public/logo/logolila.png" alt="Logotipo"/></li>
                     <li><a href="http://localhost:8080/">Inicio</a></li>
                     <li>Explorar</li>
                     <li>Notificaciones</li>
                     <li>Mensajes</li>
                     <li>Perfil</li>
                     <li>Más opciones</li>
+                    <li> 
+                        <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                        </form>
+                    </li>
                 </ul>
             </nav>
         </header>
         <article>
             <section>
                 <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
+                <form>
+                    <input type="button" value="Friend request">
+                </form>
+                <p>XX friends</p>
+            </section>
+            <section>
                 <div class="publications">
                     <div class="publication" th:each="publication : ${publications}">
                         <div class="publication_meta">
@@ -32,13 +45,17 @@
                         <div class="publication_text" th:text="${publication.getText()}">
                             El texto del mensaje
                         </div>
-                        <div class="publication_interaction">
-                            <button class="like_buttom" type="button">Like</button>
-                            <textarea name="comment" form="usrform">Comment</textarea>
-                        </div>
+                        <form>
+                            <input type="button" value="like">
+                            <input type="text" value="comment">
+                            <input type="button" value="share">
+                        </form>
                     </div>
                 </div>
             </section>
         </article>
+        <footer>
+            <p>Privacy policy</p>
+        </footer>
     </body>
 </html>

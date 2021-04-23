@@ -2,14 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Social network</title>
+        <title>witticism</title>
         <link rel="stylesheet" href="public/socialnetwork.css">
+        <link rel="icon" href="/public/logo/logolila.ico">
     </head>
     <body>
         <header>
             <nav>
                 <ul>
-                    <li>Inicio</li>
+                    <li><img src="/public/logo/logolila.png" alt="Logotipo"/></li>
+                    <li><a href="http://localhost:8080/">Inicio</a></li>
                     <li>Explorar</li>
                     <li>Notificaciones</li>
                     <li>Mensajes</li>
@@ -25,19 +27,18 @@
         </header>
         <article>
             <section>
-                <div th:text="${#authentication.principal.username}">
-                    User name here
-                </div>
-                <h1>Bienvenid@, <span class="profile_user" th:text="${profileUser.getName()}">Profile user name</span></h1>
+                <h1>Welcome, <span th:text="${#authentication.principal.username}">User name here</span></h1>
                 <h2>What's on your mind?</h2>
-                <textarea name="comment" form="usrform">Tell us about your day.</textarea>
+                <form>
+                    <input type="text" value="Tell us about your day">
+                </form>
             </section>
             <section>
-                <h2>Últimas publicaciones</h2>
+                <h2>Last news</h2>
                 <div class="publications">
                     <div class="publication" th:each="publication : ${publications}">
                         <div class="publication_meta">
-                            <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
+                            <a href="http://localhost:8080/user"><span class="user" th:text="${publication.getUser().getName()}">Pepe</span></a>
                             <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
                             <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
                             <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
@@ -52,9 +53,10 @@
                         </form>
                     </div>
                 </div>
-                <a href="http://localhost:8080/user">Bob`s Profile</a>
             </section>
         </article>
-        
+        <footer>
+            <p>Privacy policy</p>
+        </footer>
     </body>
 </html>

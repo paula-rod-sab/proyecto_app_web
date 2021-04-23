@@ -87,7 +87,7 @@ public class MainController {
         pub2.setTimestamp(new Date());
         Publication pub3 = new Publication();
         pub3.setUser(userBob);
-        pub3.setText("Dinner with Alice in Hibachi!");
+        pub3.setText("Dinner with Alice at Hibachi!");
         pub3.setRestricted(true);
         pub3.setTimestamp(new Date());
         publications.add(pub1);
