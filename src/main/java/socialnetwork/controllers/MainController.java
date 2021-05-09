@@ -22,15 +22,17 @@ import org.springframework.validation.BindingResult;
 
 import socialnetwork.model.UserRepository;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/")
 public class MainController {
 
     @GetMapping(path = "/")
-    public String mainView(Model model) {
-        User profileUser = new User();
-        profileUser.setName("Mary Jones");
+    public String mainView(Model model, Principal principal) {
+        User profileUser = userRepository.findByEmail(principal.getName());
+        model.addAttribute("user", profileUser);
+        profileUser.setName(profileUser.getName());
         profileUser.setDescription("Addicted to social networks");
         List<Publication> publications = new ArrayList<Publication>();
         User userJane = new User();

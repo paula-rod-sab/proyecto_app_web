@@ -30,7 +30,7 @@
             </header>
             <article class="grid-item grid-article">
                 <section>
-                    <h1>Welcome, <span th:text="${#authentication.principal.username}">User name here</span></h1>
+                    <h1>Welcome, <span th:text="${user.getName()}">User name here</span></h1>
                     <h2>What's on your mind?</h2>
                     <form>
                         <input type="text" value="Tell us about your day">
