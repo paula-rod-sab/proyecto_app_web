@@ -7,22 +7,32 @@
         <link rel="icon" href="/public/logo/logolila.ico">
     </head>
     <body>
-        <img class="img-logo" src="public/logo/logolila.png" alt="Logotipo"/>
-        <form class="bloque" th:action="@{/register}" th:object="${user}" method="post">
-            <div>
-                <label>User name: <input type="text" th:field="*{name}" required></label>
-                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+        <div>
+            <img  class="img-logo" src="public/logo/logolila.png" alt="Logotipo"/>
+            <div class="bloque">
+                <div th:if="${param.duplicate_email}">
+                    This email acccount already exists. 
+                </div>
+                <div th:if="${param.passwords}">
+                    The passwords do not match.
+                </div>
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <div>
+                        <label>User name: <input type="text" th:field="*{name}" required></label>
+                        <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+                    </div>
+                    <div>
+                        <label>Email: <input type="email" th:field="*{email}" required></label>
+                        <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+                    </div>
+                    <div>
+                        <label>Password: <input type="password" th:field="*{password}" required></label>
+                        <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
+                    </div>
+                    <div><label>Repeat password: <input type="password" name="passwordRepeat" required></label></div>
+                    <div><input type="submit" value="Sign Up"></div>
+                </form>
             </div>
-            <div>
-                <label>Email: <input type="email" th:field="*{email}" required></label>
-                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
-            </div>
-            <div>
-                <label>Password: <input type="password" th:field="*{password}" required></label>
-                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</td>
-            </div>
-            <div><label>Repeat password: <input type="password" name="passwordRepeat" required></label></div>
-            <div><input type="submit" value="Sign Up"></div>
-        </form>
+        </div>
     </body>
 </html>
