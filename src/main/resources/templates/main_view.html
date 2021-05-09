@@ -53,7 +53,7 @@
                     <div class="publications">
                         <div class="publication" th:each="publication : ${publications}">
                             <div class="publication_meta">
-                                <a href="http://localhost:8080/user"><span class="user" th:text="${publication.getUser().getName()}">Pepe</span></a>
+                                <a href="http://localhost:8080/user/2"><span class="user" th:text="${publication.getUser().getName()}">Pepe</span></a>
                                 <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
                                 <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
                                 <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>

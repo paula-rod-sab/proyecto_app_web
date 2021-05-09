@@ -3,11 +3,15 @@ package socialnetwork.controllers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import socialnetwork.model.Publication;
 import socialnetwork.model.User;
@@ -71,36 +75,18 @@ public class MainController {
         return "main_view";
     }
 
-    @GetMapping(path = "/user")
-    public String userView(Model model){
-        List<Publication> publications = new ArrayList<Publication>();
-        User userBob = new User();
-        userBob.setEmail("bob@example.com");
-        userBob.setName("Bob Ratliff");
-        userBob.setDescription("I love basketball!"); 
-        Publication pub1 = new Publication();
-        pub1.setUser(userBob);
-        pub1.setText("Listen to my new song on Spotify!!");
-        pub1.setRestricted(false);
-        pub1.setTimestamp(new Date());
-        Publication pub2 = new Publication();
-        pub2.setUser(userBob);
-        pub2.setText("Help! my dog is soo adorable");
-        pub2.setRestricted(true);
-        pub2.setTimestamp(new Date());
-        Publication pub3 = new Publication();
-        pub3.setUser(userBob);
-        pub3.setText("Dinner with Alice at Hibachi!");
-        pub3.setRestricted(true);
-        pub3.setTimestamp(new Date());
-        publications.add(pub1);
-        publications.add(pub2);
-        publications.add(pub3);
-        model.addAttribute("user", userBob);
-        model.addAttribute("publications", publications);
+    @GetMapping(path = "/user/{userId}")
+    public String userView(@PathVariable int userId, Model model) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (!userOpt.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
 
+        }
+        User user = userOpt.get();
+        model.addAttribute("user", user);
+        model.addAttribute("publications", publicationRepository.findByUserOrderByTimestampDesc(user));
         return "user_view";
-    } 
+    }
 
     @GetMapping(path = "/login")
     public String loginForm() {
