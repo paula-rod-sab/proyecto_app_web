@@ -14,5 +14,7 @@ socialnetwork/services/UserDetailsServiceImpl.java
  socialnetwork.services.UserDetailsServiceImpl
 socialnetwork/model/User.java
  socialnetwork.model.User
+socialnetwork/model/PublicationRepository.java
+ socialnetwork.model.PublicationRepository
 socialnetwork/controllers/MainController.java
  socialnetwork.controllers.MainController

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import socialnetwork.model.Publication;
 import socialnetwork.model.User;
+import socialnetwork.model.PublicationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import socialnetwork.services.UserService;
@@ -117,6 +118,9 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PublicationRepository publicationRepository;    
+
     @PostMapping(path = "/register")
     public String register(@Valid @ModelAttribute("user") User user,
                         BindingResult bindingResult,
@@ -133,6 +137,20 @@ public class MainController {
             return "redirect:register?passwords";
         }
         return "redirect:login?registered";
+    }
+
+    @PostMapping(path = "/post")
+    public String postPublication(@Valid @ModelAttribute("publication") Publication publication,
+                                BindingResult bindingResult,
+                                Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/";
+        }
+        User user = userRepository.findByEmail(principal.getName());
+        publication.setUser(user);
+        publication.setTimestamp(new Date());
+        publicationRepository.save(publication);
+        return "redirect:/";
     }
 
 }
