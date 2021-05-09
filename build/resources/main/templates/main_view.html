@@ -32,12 +32,9 @@
                 <section>
                     <h1>Welcome, <span th:text="${user.getName()}">User name here</span></h1>
                     <h2>What's on your mind?</h2>
-                    <form>
-                        <input type="text" value="Tell us about your day">
-                    </form>
                     <form th:action="@{/post}" th:object="${publication}" method="post">
                         <div>
-                            <textarea th:field="*{text}" placeholder="Your publication text here" required></textarea>
+                            <textarea th:field="*{text}" placeholder="Tell us about your day" required></textarea>
                         </div>
                         <div>
                             <label>

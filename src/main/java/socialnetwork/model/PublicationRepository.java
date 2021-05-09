@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface PublicationRepository extends CrudRepository<Publication, Integer> {
     List<Publication> findByUserOrderByTimestampDesc(User user);
+    List<Publication> findFirst10ByRestrictedIsFalseOrderByTimestampDesc();
 }
