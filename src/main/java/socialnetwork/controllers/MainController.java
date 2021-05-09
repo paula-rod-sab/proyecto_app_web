@@ -29,7 +29,7 @@ import java.security.Principal;
 public class MainController {
 
     @GetMapping(path = "/")
-    public String mainView(Model model, Principal principal) {
+    public String mainView(Model model, Principal principal, Publication publication) {
         User profileUser = userRepository.findByEmail(principal.getName());
         model.addAttribute("user", profileUser);
         profileUser.setName(profileUser.getName());

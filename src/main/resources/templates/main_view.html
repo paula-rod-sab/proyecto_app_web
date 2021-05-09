@@ -35,6 +35,18 @@
                     <form>
                         <input type="text" value="Tell us about your day">
                     </form>
+                    <form th:action="@{/post}" th:object="${publication}" method="post">
+                        <div>
+                            <textarea th:field="*{text}" placeholder="Your publication text here" required></textarea>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" th:field="*{restricted}">
+                                For friends only
+                            </label>
+                        </div>
+                        <div><input type="submit" value="Post!"></div>
+                    </form>
                 </section>
                 <section>
                     <h2>Last news</h2>
