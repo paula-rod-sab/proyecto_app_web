@@ -7,55 +7,60 @@
         <link rel="icon" href="/public/logo/logolila.ico">
     </head>
     <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><img src="/public/logo/logolila.png" alt="Logotipo"/></li>
-                    <li><a href="http://localhost:8080/">Inicio</a></li>
-                    <li>Explorar</li>
-                    <li>Notificaciones</li>
-                    <li>Mensajes</li>
-                    <li>Perfil</li>
-                    <li>Más opciones</li>
-                    <li> 
-                        <form th:action="@{/logout}" method="post">
-                        <input type="submit" value="Sign Out"/>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <article>
-            <section>
-                <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
-                <form>
-                    <input type="button" value="Friend request">
-                </form>
-                <p>XX friends</p>
-            </section>
-            <section>
-                <div class="publications">
-                    <div class="publication" th:each="publication : ${publications}">
-                        <div class="publication_meta">
-                            <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
-                            <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
-                            <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
-                            <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
-                        </div>
-                        <div class="publication_text" th:text="${publication.getText()}">
-                            El texto del mensaje
-                        </div>
-                        <form>
-                            <input type="button" value="like">
-                            <input type="text" value="comment">
-                            <input type="button" value="share">
-                        </form>
+        <div class="grid-container">
+            <header class="grid-item grid-header">
+                <nav>
+                    <img class="logo" src="/public/logo/logolila.png" alt="Logotipo"/>
+                    <div>
+                        <ul class="navigation">
+                            <li class="navigation__index"><a href="http://localhost:8080/">Home</a></li>
+                            <li class="navigation__index"><a href="#">Explore</a></li>
+                            <li class="navigation__index"><a href="#">Notifications</a></li>
+                            <li class="navigation__index"><a href="#">Messages</a></li>
+                            <li class="navigation__index"><a href="#">Profile</a></li>
+                            <li class="navigation__index"><a href="#">More options</a></li>
+                            <li class="navigation__index"> 
+                                <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="Sign Out"/>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </section>
-        </article>
-        <footer>
-            <p>Privacy policy</p>
-        </footer>
+                </nav>
+            </header>
+            <article class="grid-item grid-article">
+                <section>
+                    <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
+                    <form>
+                        <input type="button" value="Friend request">
+                    </form>
+                    <p>XX friends</p>
+                </section>
+                <section>
+                    <h2>Publications</h2>
+                    <div class="publications">
+                        <div class="publication" th:each="publication : ${publications}">
+                            <div class="publication_meta">
+                                <span class="user" th:text="${publication.getUser().getName()}">Pepe</span>
+                                <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
+                                <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>
+                                <span class="timestamp" th:text="${publication.getTimestamp()}">15 de marzo de 2021</span>
+                            </div>
+                            <div class="publication_text" th:text="${publication.getText()}">
+                                El texto del mensaje
+                            </div>
+                            <form>
+                                <input type="button" value="like">
+                                <input type="text" value="comment">
+                                <input type="button" value="share">
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </article>
+            <footer class="grid-item grid-footer">
+                <p>Privacy policy · Copyrigth</p>
+            </footer>
+        </div>
     </body>
 </html>

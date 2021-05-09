@@ -7,22 +7,26 @@
         <link rel="icon" href="/public/logo/logolila.ico">
     </head>
     <body>
-        <img src="public/logo/logolila.png" alt="Logotipo"/>
-        <div th:if="${param.error}">
-            Invalid username and password.
+        <div>
+            <img  class="img-logo" src="public/logo/logolila.png" alt="Logotipo"/>
+            <div class="bloque">
+                <div th:if="${param.error}">
+                    Invalid username and password.
+                </div>
+                <div th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+                <div th:if="${param.registered}">
+                    Your new user has been registered.
+                </div>
+                <form th:action="@{/login}" method="post">
+                    <div><label>Email: <input type="email" name="username" required/></label></div>
+                    <div><label>Password: <input type="password" name="password" required/></label></div>
+                    <div><input type="submit" value="Sign In"/></div>
+                </form>
+                <p>Don't have an account?</p>
+                <a href="http://localhost:8080/register">Register</a>
+            </div>
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <div th:if="${param.registered}">
-            Your new user has been registered.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label>Email: <input type="email" name="username" required/></label></div>
-            <div><label>Password: <input type="password" name="password" required/></label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-        <p>You don't have an account?</p>
-        <a href="http://localhost:8080/register">Register</a>
     </body>
 </html>

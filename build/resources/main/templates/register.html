@@ -7,8 +7,8 @@
         <link rel="icon" href="/public/logo/logolila.ico">
     </head>
     <body>
-        <img src="public/logo/logolila.png" alt="Logotipo"/>
-        <form th:action="@{/register}" th:object="${user}" method="post">
+        <img class="img-logo" src="public/logo/logolila.png" alt="Logotipo"/>
+        <form class="bloque" th:action="@{/register}" th:object="${user}" method="post">
             <div>
                 <label>User name: <input type="text" th:field="*{name}" required></label>
                 <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
