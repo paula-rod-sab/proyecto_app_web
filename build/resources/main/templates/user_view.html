@@ -29,21 +29,27 @@
                 </nav>
             </header>
             <article class="grid-item grid-article">
-                <section>
+                
+                <section th:with="sessionUser=${#authentication.principal}">
                     <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
                     <p>Description</p>
-                    <div th:if="${#authentication.principal.username == user.getEmail()}">
-                        <form th:action="@{/bio}" th:object="${user}" method="post">
+                    <p><span th:text="${user.getDescription()}">Description</span></p>
+                    <div th:if="${sessionUser.username == user.getEmail()}">
+                        <p>Do you want to edit your biography?</p>
+                        <form th:action="@{/bio}" method="post">
                             <div>
-                                <textarea th:field="*{description}"></textarea>
+                                <textarea name="description" th:text="${user.getDescription()}"></textarea>
                             </div>
                             <div><input type="submit" value="Edita"></div>
                         </form>
                     </div>
-                    <form>
-                        <input type="button" value="Friend request">
-                    </form>
                     <p>XX friends</p>
+                    <div th:if="${user.getEmail() != sessionUser.username && !user.getFriends().contains(sessionUser.username)}">
+                        <form th:action="@{/requestFriendship}" method="post">
+                            <input type="hidden" name="userId" th:value="${user.getId()}">
+                            <input type="submit" value="Request friendship">
+                        </form>
+                    </div>
                 </section>
                 <section>
                     <h2>Publications</h2>

@@ -76,6 +76,7 @@ public class MainController {
     @Autowired
     private PublicationRepository publicationRepository;    
 
+  
     @PostMapping(path = "/register")
     public String register(@Valid @ModelAttribute("user") User user,
                         BindingResult bindingResult,
@@ -109,21 +110,17 @@ public class MainController {
     }
 
     @PostMapping(path = "/bio")
-    public String createbio(@Valid @ModelAttribute("user") User user,
-                            BindingResult bindingResult, @RequestParam String description, 
+    public String createbio(@RequestParam String description, 
                             Principal principal) {
 
-        if (bindingResult.hasErrors()) {
-            return "redirect:/user";
-        }
-
+        User user = userRepository.findByEmail(principal.getName());
         user.setDescription(description);
         userRepository.save(user);
         
         
-        return "redirect:/user";
+        return "redirect:/user/" + user.getId();
     }
 
-     
+   
 
 }
