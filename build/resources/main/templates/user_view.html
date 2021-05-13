@@ -31,6 +31,15 @@
             <article class="grid-item grid-article">
                 <section>
                     <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
+                    <p>Description</p>
+                    <div th:if="${#authentication.principal.username == user.getEmail()}">
+                        <form th:action="@{/bio}" th:object="${user}" method="post">
+                            <div>
+                                <textarea th:field="*{description}"></textarea>
+                            </div>
+                            <div><input type="submit" value="Edita"></div>
+                        </form>
+                    </div>
                     <form>
                         <input type="button" value="Friend request">
                     </form>

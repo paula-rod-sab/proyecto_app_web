@@ -50,7 +50,6 @@
                     <div class="publications">
                         <div class="publication" th:each="publication : ${publications}">
                             <div class="publication_meta">
-                             
                                 <a th:href="@{/user/{id}(id=${publication.getUser().getId()})}" th:text="${publication.getUser().getName()}">Pepe</a>
                                 <span class="publication_restricted" th:if="${publication.isRestricted()}">restricted</span>
                                 <span class="publication_public" th:if="${!publication.isRestricted()}">public</span>

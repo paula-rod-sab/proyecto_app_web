@@ -38,7 +38,7 @@ public class MainController {
         User profileUser = userRepository.findByEmail(principal.getName());
         model.addAttribute("user", profileUser);
         profileUser.setName(profileUser.getName());
-        profileUser.setDescription("Addicted to social networks");
+        profileUser.setDescription(profileUser.getDescription());
         model.addAttribute("profileUser", profileUser);
         model.addAttribute("publications", publicationRepository.findFirst10ByRestrictedIsFalseOrderByTimestampDesc());
         return "main_view";
@@ -107,5 +107,23 @@ public class MainController {
         publicationRepository.save(publication);
         return "redirect:/";
     }
+
+    @PostMapping(path = "/bio")
+    public String createbio(@Valid @ModelAttribute("user") User user,
+                            BindingResult bindingResult, @RequestParam String description, 
+                            Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            return "redirect:/user";
+        }
+
+        user.setDescription(description);
+        userRepository.save(user);
+        
+        
+        return "redirect:/user";
+    }
+
+     
 
 }
