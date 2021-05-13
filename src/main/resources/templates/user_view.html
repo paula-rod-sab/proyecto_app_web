@@ -42,7 +42,7 @@
                         </form>
                     </div>
                     <p>XX friends</p>
-                    <div th:if="${user.getEmail() != sessionUser.username && !user.getFriends().contains(sessionUser.username)}">
+                    <div th:if="${user.getEmail() != sessionUser.username && !user.getFriends().contains(sessionUser.username) &&  request == NULL}">
                         <form th:action="@{/requestFriendship}" method="post">
                             <input type="hidden" name="userId" th:value="${user.getId()}">
                             <input type="submit" value="Request friendship">
