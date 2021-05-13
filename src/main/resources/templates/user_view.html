@@ -29,18 +29,16 @@
                 </nav>
             </header>
             <article class="grid-item grid-article">
-                
                 <section th:with="sessionUser=${#authentication.principal}">
-                    <h1>Perfil de <span class="profile_user" th:text="${user.getName()}">Profile user name</span></h1>
-                    <p>Description</p>
-                    <p><span th:text="${user.getDescription()}">Description</span></p>
+                    <h1 class="profile_user">Perfil de <span th:text="${user.getName()}">Profile user name</span></h1>
+                    <p class="biography"><span th:text="${user.getDescription()}">Description</span></p>
                     <div th:if="${sessionUser.username == user.getEmail()}">
-                        <p>Do you want to edit your biography?</p>
+                        <p class="ques">Do you want to edit your biography?</p>
                         <form th:action="@{/bio}" method="post">
                             <div>
-                                <textarea name="description" th:text="${user.getDescription()}"></textarea>
+                                <textarea class="textareaedit" name="description" th:text="${user.getDescription()}"></textarea>
                             </div>
-                            <div><input type="submit" value="Edita"></div>
+                            <div><input type="submit" value="Edit!"></div>
                         </form>
                     </div>
                     <p>XX friends</p>

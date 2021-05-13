@@ -77,6 +77,35 @@ ul {
     height: 50px;
 }
 
+.profile_user { 
+    font-size: 150%;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.biography { 
+    font-size: 100%;
+    font-style: italic;
+}
+
+.ques {  
+    margin-top: 30px;
+    font-size: 70%;
+}
+
+.textareaedit { 
+    font-size: 65%;
+    font-style: italic;
+    width: 300px;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
 .logo {
     width: 200px;
     margin-bottom: 40px;
