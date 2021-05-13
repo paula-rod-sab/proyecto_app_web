@@ -44,6 +44,7 @@ public class MainController {
         profileUser.setDescription(profileUser.getDescription());
         model.addAttribute("profileUser", profileUser);
         model.addAttribute("publications", publicationRepository.findFirst10ByRestrictedIsFalseOrderByTimestampDesc());
+        model.addAttribute("requestList", friendshipRequestRepository.findByReceiverAndState(profileUser, FriendshipRequest.State.OPEN));
         return "main_view";
     }
 

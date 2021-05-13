@@ -26,6 +26,15 @@
                             </li>
                         </ul>
                     </div>
+                    <p>Friend request:</p>
+                    <div th:each="friendrequest : ${requestList}">
+                        <a th:href="@{/user/{id}(id=${friendrequest.getSender().getId()})}" th:text="${friendrequest.getSender().getName()}">Pepe</a>
+                        <form th:action="@{/answerFriendshipRequest}" method="post">
+                            <input type="hidden" name="requestId" th:value="${friendrequest.getId()}">
+                            <input type="submit" name="action" value="Accept">
+                            <input type="submit" name="action" value="Decline">
+                        </form>
+                    </div>
                 </nav>
             </header>
             <article class="grid-item grid-article">
